@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luczz Gmail</title>
+<style>
+:root{--bg:#090910;--panel:#141421;--purple:#9b5cff;--text:#f4efff;--muted:#aaa6bd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:20px;background:#11101b;border-bottom:1px solid #302044;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold;color:#bc8aff}
+main{max-width:850px;margin:auto;padding:20px}
+.card{background:var(--panel);border:1px solid #302044;border-radius:16px;padding:20px;margin:15px 0;box-shadow:0 0 18px #8d40ff0c}
+h2{margin-top:0}
+p{color:var(--muted);line-height:1.5}
+button{background:var(--purple);color:white;border:0;border-radius:9px;padding:12px 16px;font-weight:bold;cursor:pointer}
+button.secondary{background:#292337}
+input{display:block;width:100%;padding:13px;margin:10px 0;background:#090910;border:1px solid #413052;border-radius:9px;color:white}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+nav button{flex:1;min-width:90px}
+.page{display:none}.page.active{display:block}
+.stat{font-size:26px;font-weight:bold;color:#bd91ff}
+.notice{border-left:3px solid var(--purple);padding:10px;background:#20152e}
+footer{text-align:center;color:var(--muted);padding:30px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">✦ Luczz Gmail</div>
+  <span id="status">Guest</span>
+</header>
+<main>
+  <section id="login" class="card">
+    <h2>Selamat datang 👋</h2>
+    <p>Masuk ke dashboard Luczz Gmail.</p>
+    <input id="username" placeholder="Username" autocomplete="username">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+    <button onclick="login()">Masuk</button>
+    <p id="msg"></p>
+    <p>Demo tampilan saja. Login belum terhubung ke server.</p>
+  </section>
+
+  <section id="dashboard" style="display:none">
+    <h2>Dashboard</h2>
+    <p>Kelola aktivitas akunmu di satu tempat.</p>
+    <nav>
+      <button onclick="showPage('home')">Beranda</button>
+      <button onclick="showPage('stor')">STOR</button>
+      <button onclick="showPage('booking')">Booking</button>
+      <button onclick="showPage('wallet')">Saldo</button>
+    </nav>
+    <div id="home" class="page active">
+      <div class="card"><p>Saldo demo</p><div class="stat">Rp0</div></div>
+      <div class="card"><h2>Informasi</h2><p>Selamat datang di Luczz Gmail.</p><div class="notice">Pastikan semua informasi dan transaksi diperiksa sebelum digunakan.</div></div>
+    </div>
+    <div id="stor" class="page">
+      <div class="card"><h2>STOR sekarang</h2><p>Harga tampilan: Rp2.500 per item.</p><p>Fitur pengiriman dan pencatatan STOR belum aktif.</p><button class="secondary" onclick="alert('Fitur server belum diaktifkan')">Mulai STOR</button></div>
+    </div>
+    <div id="booking" class="page">
+      <div class="card"><h2>Booking</h2><p>Status: belum tersedia</p><p>Booking perlu database online agar satu item tidak dipesan dua kali.</p></div>
+    </div>
+    <div id="wallet" class="page">
+      <div class="card"><h2>Saldo & penarikan</h2><p>Saldo demo: Rp0</p><p>Penarikan belum aktif. Jangan masukkan data pembayaran sungguhan.</p></div>
+    </div>
+    <button class="secondary" onclick="logout()">Keluar</button>
+  </section>
+</main>
+<footer>Luczz Gmail · Dashboard Preview</footer>
+<script>
+function login(){
+ const u=document.getElementById('username').value.trim();
+ const p=document.getElementById('password').value;
+ if(!u||!p){document.getElementById('msg').textContent='Isi username dan password dulu.';return}
+ document.getElementById('msg').textContent='Login demo berhasil.';
+ document.getElementById('login').style.display='none';
+ document.getElementById('dashboard').style.display='block';
+ document.getElementById('status').textContent=u;
+}
+function logout(){
+ document.getElementById('dashboard').style.display='none';
+ document.getElementById('login').style.display='block';
+ document.getElementById('status').textContent='Guest';
+ document.getElementById('password').value='';
+}
+function showPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+        </html>
+        
